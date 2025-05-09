@@ -162,20 +162,29 @@ h1 {
 }
 
 .share-button {
-    background: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #FEE500;
     border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
     cursor: pointer;
-    padding: 0;
     transition: transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .share-button:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .share-button img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    width: 24px;
+    height: 24px;
+}
+
+.share-button span {
+    color: #000000;
+    font-weight: 500;
+    font-size: 0.9em;
 }

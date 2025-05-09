@@ -61,27 +61,23 @@ function shareToKakao(menu) {
         weekday: 'long' 
     });
     
-    Kakao.Link.sendDefault({
-        objectType: 'feed',
-        content: {
+    // 공유할 텍스트 생성
+    const shareText = `[울산 강동초등학교 급식]\n${dateStr}\n\n${menu}`;
+    
+    // 카카오톡 공유하기
+    if (navigator.share) {
+        navigator.share({
             title: '울산 강동초등학교 급식',
-            description: `${dateStr}\n\n${menu}`,
-            imageUrl: 'https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png',
-            link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href,
-            },
-        },
-        buttons: [
-            {
-                title: '급식 정보 보기',
-                link: {
-                    mobileWebUrl: window.location.href,
-                    webUrl: window.location.href,
-                },
-            },
-        ],
-    });
+            text: shareText,
+            url: window.location.href
+        })
+        .catch(error => console.log('공유하기 실패:', error));
+    } else {
+        // 공유 API를 지원하지 않는 경우 클립보드에 복사
+        navigator.clipboard.writeText(shareText)
+            .then(() => alert('급식 정보가 클립보드에 복사되었습니다.'))
+            .catch(err => console.error('클립보드 복사 실패:', err));
+    }
 }
 
 // 페이지 로드 시 실행
