@@ -38,9 +38,9 @@ async function getMealInfo() {
             
             document.getElementById('lunch-menu').innerHTML = formattedMenu;
             
-            // 공유 버튼 이벤트 리스너 추가
+            // 카카오톡 공유 버튼 이벤트 리스너 추가
             document.getElementById('kakao-share').addEventListener('click', () => {
-                shareMealInfo(menu);
+                shareToKakao(menu);
             });
         } else {
             document.getElementById('lunch-menu').textContent = '급식 정보가 없습니다.';
@@ -51,8 +51,8 @@ async function getMealInfo() {
     }
 }
 
-// 급식 정보 공유하기
-function shareMealInfo(menu) {
+// 카카오톡으로 공유하기
+function shareToKakao(menu) {
     const now = new Date();
     const dateStr = now.toLocaleDateString('ko-KR', { 
         year: 'numeric', 
@@ -60,24 +60,29 @@ function shareMealInfo(menu) {
         day: 'numeric', 
         weekday: 'long' 
     });
-    
-    // 공유할 텍스트 생성
-    const shareText = `[울산 강동초등학교 급식]\n${dateStr}\n\n${menu}`;
-    
-    // 공유 API를 지원하는 경우
-    if (navigator.share) {
-        navigator.share({
+
+    // 카카오톡 공유하기
+    Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
             title: '울산 강동초등학교 급식',
-            text: shareText,
-            url: window.location.href
-        })
-        .catch(error => console.log('공유하기 실패:', error));
-    } else {
-        // 공유 API를 지원하지 않는 경우 클립보드에 복사
-        navigator.clipboard.writeText(shareText)
-            .then(() => alert('급식 정보가 클립보드에 복사되었습니다.'))
-            .catch(err => console.error('클립보드 복사 실패:', err));
-    }
+            description: `${dateStr}\n\n${menu}`,
+            imageUrl: 'https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png',
+            link: {
+                mobileWebUrl: window.location.href,
+                webUrl: window.location.href,
+            },
+        },
+        buttons: [
+            {
+                title: '급식 정보 보기',
+                link: {
+                    mobileWebUrl: window.location.href,
+                    webUrl: window.location.href,
+                },
+            },
+        ],
+    });
 }
 
 // 페이지 로드 시 실행
