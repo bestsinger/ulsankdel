@@ -24,16 +24,22 @@ body {
 
 h1 {
     text-align: center;
-    color: #FF6B6B;
+    color: #2c3e50;
     margin-bottom: 20px;
-    font-size: 2.5em;
-    text-shadow: 2px 2px 0px #fff;
-    animation: bounce 2s infinite;
+    font-size: 1.8em;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 10px;
 }
 
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+h1 img {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
 }
 
 .date-info {
@@ -145,11 +151,31 @@ h1 {
     }
     
     h1 {
-        font-size: 2em;
+        font-size: 1.4em;
+        gap: 8px;
+        padding: 0 5px;
+    }
+    
+    h1 img {
+        width: 24px;
+        height: 24px;
     }
     
     .menu-content {
         font-size: 1.1em;
+    }
+}
+
+/* 작은 모바일 화면 */
+@media (max-width: 360px) {
+    h1 {
+        font-size: 1.2em;
+        gap: 6px;
+    }
+    
+    h1 img {
+        width: 20px;
+        height: 20px;
     }
 }
 
