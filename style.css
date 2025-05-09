@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Gaegu', cursive;
+    background-color: #FFE5E5;
+    background-image: 
+        radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.2) 2%, transparent 0%),
+        radial-gradient(circle at 75px 75px, rgba(255, 255, 255, 0.2) 2%, transparent 0%);
+    background-size: 100px 100px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #FF6B6B;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 0px #fff;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.date-info {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4A90E2;
+    font-size: 1.3em;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 0 #4A90E2;
+    display: inline-block;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.meal-container {
+    background-color: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 0 #FF6B6B;
+    border: 3px solid #FF6B6B;
+    position: relative;
+    overflow: hidden;
+}
+
+.meal-container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, #FF6B6B, #4A90E2);
+    z-index: -1;
+    border-radius: 25px;
+    opacity: 0.1;
+}
+
+.meal-box {
+    margin-bottom: 20px;
+}
+
+.meal-box h2 {
+    color: #FF6B6B;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: #FFF5F5;
+    border-radius: 10px;
+    border: 2px dashed #FF6B6B;
+}
+
+.menu-content {
+    line-height: 1.8;
+    color: #666;
+    font-size: 1.2em;
+    padding: 15px;
+    background-color: #FFF5F5;
+    border-radius: 15px;
+    border: 2px solid #FFE5E5;
+}
+
+.menu-item {
+    padding: 8px 0;
+    border-bottom: 2px dashed #FFE5E5;
+    display: flex;
+    align-items: center;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.menu-item::before {
+    content: '🍱';
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+@keyframes loading {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #FF6B6B;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: loading 1s linear infinite;
+    margin-right: 10px;
+}
+
+/* 호버 효과 */
+.meal-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 0 #FF6B6B;
+    transition: all 0.3s ease;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    .menu-content {
+        font-size: 1.1em;
+    }
+}
