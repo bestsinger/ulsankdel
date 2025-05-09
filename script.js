@@ -1,3 +1,6 @@
+// 카카오 SDK 초기화
+Kakao.init('f95f52bf91ef953bf46146e709850ea1');
+
 // 현재 날짜 표시
 function displayCurrentDate() {
     const now = new Date();
@@ -34,6 +37,11 @@ async function getMealInfo() {
                 .join('');
             
             document.getElementById('lunch-menu').innerHTML = formattedMenu;
+            
+            // 카카오톡 공유 버튼 이벤트 리스너 추가
+            document.getElementById('kakao-share').addEventListener('click', () => {
+                shareToKakao(menu);
+            });
         } else {
             document.getElementById('lunch-menu').textContent = '급식 정보가 없습니다.';
         }
@@ -41,6 +49,39 @@ async function getMealInfo() {
         console.error('급식 정보를 가져오는데 실패했습니다:', error);
         document.getElementById('lunch-menu').textContent = '급식 정보를 불러오는데 실패했습니다.';
     }
+}
+
+// 카카오톡으로 공유하기
+function shareToKakao(menu) {
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('ko-KR', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric', 
+        weekday: 'long' 
+    });
+    
+    Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+            title: '울산 강동초등학교 급식',
+            description: `${dateStr}\n\n${menu}`,
+            imageUrl: 'https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png',
+            link: {
+                mobileWebUrl: window.location.href,
+                webUrl: window.location.href,
+            },
+        },
+        buttons: [
+            {
+                title: '급식 정보 보기',
+                link: {
+                    mobileWebUrl: window.location.href,
+                    webUrl: window.location.href,
+                },
+            },
+        ],
+    });
 }
 
 // 페이지 로드 시 실행
